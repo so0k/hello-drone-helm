@@ -1,4 +1,4 @@
-FROM nginx:1.11-alpine
+FROM nginx:1.12-alpine
 ENV AUTHOR=WorkerBee
 
 # change base directory nginx serves from
