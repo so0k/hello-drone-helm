@@ -11,8 +11,8 @@ pipeline:
   helm_deploy_staging:
     image: quay.io/honestbee/drone-helm
     skip_tls_verify: true
-    helm_repos: hb-charts=http://helm-charts.honestbee.com
-    chart: hb-charts/hello-world
+    helm_repos: public-charts=http://tech.honestbee.com/public-charts
+    chart: public-charts/hello-world
     values: image.repository=quay.io/honestbee/hello-drone-helm,image.tag=${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:7}
     release: ${DRONE_REPO_NAME}-${DRONE_BRANCH}
     prefix: STAGING
