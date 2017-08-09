@@ -15,7 +15,7 @@ pipeline:
     skip_tls_verify: true
     helm_repos: public-charts=http://tech.honestbee.com/public-charts
     chart: public-charts/hello-world
-    values: image.repository=docker.registry.spawnhub.com/hello-drone-helm,image.tag=${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:7}
+    values: image.repository=docker.registry.spawnhub.com/hello-drone-helm,image.tag=${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:7},ingress.enabled=true,ingress.host=hello.spawnhub.com
     release: ${DRONE_REPO_NAME}-${DRONE_BRANCH}
     prefix: STAGING
     secrets: [ staging_api_server, staging_kubernetes_token ]
