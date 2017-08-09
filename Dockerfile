@@ -1,5 +1,5 @@
 FROM nginx:1.12-alpine
-ENV AUTHOR=HongKong
+ENV AUTHOR=YOWConf
 
 # change base directory nginx serves from
 RUN set -ex \
