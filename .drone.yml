@@ -8,9 +8,6 @@ pipeline:
     commands:
       - docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}" docker.registry.spawnhub.com
       - docker build -t image .
-      - docker tag image docker.registry.spawnhub.com/hello-drone-helm:latest
-      - docker tag image docker.registry.spawnhub.com/hello-drone-helm:${TAG}
-      - docker push docker.registry.spawnhub.com/hello-drone-helm
 
 services:
   dind:
