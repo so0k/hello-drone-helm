@@ -2,7 +2,6 @@ pipeline:
   publish:
     image: plugins/docker
     repo: docker.registry.spawnhub.com/hello-drone-helm
-    registry: docker.registry.spawnhub.com
     secrets: [ docker_username, docker_password ]
     tags: 
       - "latest"
