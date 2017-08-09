@@ -1,14 +1,24 @@
 pipeline:
-  publish:
-    image: plugins/docker
-    repo: docker.registry.spawnhub.com/hello-drone-helm
-    secrets: [ docker_registry, docker_username, docker_password ]
-    tags: 
-      - "latest"
-      - ${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:7}
-    when:
-      branch: [ master, staging ]
-  
+  build_docker_image:
+    image: docker:17.05
+    secrets: [ docker_username, docker_password ]
+    environment:
+      - DOCKER_HOST=tcp://127.0.0.1:2375
+      - TAG=${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:8}
+    commands:
+      - docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}" docker.registry.spawnhub.com
+      - docker build -t image .
+      - docker tag image docker.registry.spawnhub.com/hello-drone-helm:latest
+      - docker tag image docker.registry.spawnhub.com/hello-drone-helm:${TAG}
+      - docker push docker.registry.spawnhub.com/hello-drone-helm
+
+services:
+  dind:
+    image: docker:17.05-dind
+    privileged: true
+    command:
+      - "-s"
+      - "overlay"
   # helm_deploy_staging:
   #   image: quay.io/honestbee/drone-helm
   #   skip_tls_verify: true
